@@ -1,0 +1,199 @@
+version: 2
+
+sources:
+  - name: tpch_sample
+    database: SNOWFLAKE_SAMPLE_DATA
+    schema: TPCH_SF{{ var('tpch_size', 10) }}
+    freshness:
+      warn_after: {count: 12, period: hour}
+      error_after: {count: 24, period: hour}
+    loaded_at_field: load_date_timestamp
+    tables:
+      - name: LINEITEM
+      - name: CUSTOMER
+      - name: ORDERS
+      - name: PARTSUPP
+      - name: SUPPLIER
+      - name: PART
+      - name: NATION
+      - name: REGION
+  - name: tpcds_sample
+    database: SNOWFLAKE_SAMPLE_DATA
+    schema: TPCDS_SF10TCL
+    freshness:
+      warn_after: {count: 12, period: hour}
+      error_after: {count: 24, period: hour}
+    loaded_at_field: load_date_timestamp
+    tables:
+      - name: CUSTOMER
+        columns:
+          - name: C_CUSTOMER_SK
+          - name: C_CUSTOMER_ID
+          - name: C_CURRENT_CDEMO_SK
+          - name: C_CURRENT_HDEMO_SK
+          - name: C_CURRENT_ADDR_SK
+          - name: C_FIRST_SHIPTO_DATE_SK
+          - name: C_FIRST_SALES_DATE_SK
+          - name: C_SALUTATION
+          - name: C_FIRST_NAME
+          - name: C_LAST_NAME
+          - name: C_PREFERRED_CUST_FLAG
+          - name: C_BIRTH_DAY
+          - name: C_BIRTH_MONTH
+          - name: C_BIRTH_YEAR
+          - name: C_BIRTH_COUNTRY
+          - name: C_LOGIN
+          - name: C_EMAIL_ADDRESS
+          - name: C_LAST_REVIEW_DATE
+      - name: CUSTOMER_ADDRESS
+      - name: CUSTOMER_DEMOGRAPHICS
+      - name: HOUSEHOLD_DEMOGRAPHICS
+  - name: DEMO
+    database: DATA_REPOSITORY
+    schema: DEMO
+    freshness:
+      warn_after: {count: 12, period: hour}
+      error_after: {count: 24, period: hour}
+    loaded_at_field: load_date_timestamp
+    tables:
+      - name: AIRPORT
+        columns:
+          - name: IATA_CODE
+          - name: AIRPORT
+          - name: CITY
+          - name: STATE
+          - name: COUNTRY
+          - name: LATITUDE
+          - name: LONGITUDE
+          - name: LOAD_DATE_TIMESTAMP
+      - name: AIRLINE
+        columns:
+          - name: IATA_CODE
+          - name: IATA_CODE
+          - name: LOAD_DATE_TIMESTAMP
+      - name: FLIGHT
+        columns:
+          - name: YEAR
+          - name: MONTH
+          - name: DAY
+          - name: DAY_OF_WEEK
+          - name: AIRLINE
+          - name: FLIGHT_NUMBER
+          - name: TAIL_NUMBER
+          - name: ORIGIN_AIRPORT
+          - name: DESTINATION_AIRPORT
+          - name: SCHEDULE_DEPARTURE
+          - name: DEPARTURE_TIME
+          - name: DEPARTURE_DELAY
+          - name: TAXI_OUT
+          - name: WHEELS_OFF
+          - name: SCHEDULE_TIME
+          - name: ELAPSED_TIME
+          - name: AIR_TIME
+          - name: DISTANCE
+          - name: WHEELS_ON
+          - name: TAXI_IN
+          - name: SCHEDULE_ARRIVAL
+          - name: ARRIVAL_TIME
+          - name: ARRIVAL_DELAY
+          - name: DIVERTED
+          - name: CANCELLED
+          - name: CANCELLATION_REASON
+          - name: AIR_SYSTEM_DELAY
+          - name: SECURITY_DELAY
+          - name: AIRLINE_DELAY
+          - name: LATE_AIRCRAFT_DELAY
+          - name: WEATHER_DELAY
+          - name: LOAD_DATE_TIMESTAMP
+  - name: NETFLIX
+    database: BRONZE
+    schema: LANDING
+    freshness:
+      warn_after: {count: 12, period: hour}
+      error_after: {count: 24, period: hour}
+    loaded_at_field: etl_create_date
+    tables:
+      - name: NETFLIX_BEST_MOVIE
+        columns:
+          - name: INDEX
+          - name: TITLE
+          - name: RELEASE_YEAR
+          - name: SCORE
+          - name: NUMBER_OF_VOTES
+          - name: DURATION
+          - name: MAIN_GENRE
+          - name: MAIN_PRODUCTION
+          - name: ETL_CREATE_DATE
+      - name: NETFLIX_BEST_MOVIE_BY_YEAR
+        columns:
+          - name: INDEX
+          - name: TITLE
+          - name: RELEASE_YEAR
+          - name: SCORE
+          - name: MAIN_GENRE
+          - name: MAIN_PRODUCTION
+          - name: ETL_CREATE_DATE
+          - name: MOVIE_BUDGET
+          - name: PRODUCTION_START_DATE
+      - name: NETFLIX_BEST_SHOW
+        columns:
+          - name: INDEX
+          - name: TITLE
+          - name: RELEASE_YEAR
+          - name: SCORE
+          - name: NUMBER_OF_VOTES
+          - name: DURATION
+          - name: NUMBER_OF_SEASONS
+          - name: MAIN_GENRE
+          - name: MAIN_PRODUCTION
+          - name: ETL_CREATE_DATE
+      - name: NETFLIX_BEST_SHOW_BY_YEAR
+        columns:
+          - name: INDEX
+          - name: TITLE
+          - name: RELEASE_YEAR
+          - name: SCORE
+          - name: NUMBER_OF_SEASONS
+          - name: MAIN_GENRE
+          - name: MAIN_PRODUCTION
+          - name: ETL_CREATE_DATE
+      - name: NETFLIX_DATASET_MOVIE
+        columns:
+          - name: MOVIE_ID
+          - name: YEAR
+          - name: NAME
+          - name: ETL_CREATE_DATE
+      - name: NETFLIX_DATASET_RATING
+        columns:
+          - name: USER_ID
+          - name: RATING
+          - name: MOVIE_ID
+          - name: ETL_CREATE_DATE
+      - name: NETFLIX_ORIGINALS
+        columns:
+          - name: TITLE
+          - name: GENRE
+          - name: PREMIERE
+          - name: RUNTIME
+          - name: IMDBSCORE
+          - name: LANGUAGE
+          - name: ETL_CREATE_DATE
+      - name: NETFLIX_RAW_CREDITS
+        columns:
+          - name: INDEX
+          - name: PERSON_ID
+          - name: ID
+          - name: NAME
+          - name: CHARACTER
+          - name: ETL_CREATE_DATE
+      - name: NETFLIX_RAW_TITLES
+        columns:
+          - name: INDEX
+          - name: ID
+          - name: TITLE
+          - name: TYPE
+          - name: RELEASE_YEAR
+          - name: AGE_CERTIFICATION
+          - name: RUNTIME
+          - name: GENRES
+          - name: ETL_CREATE_DATE

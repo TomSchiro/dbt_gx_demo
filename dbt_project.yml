@@ -1,0 +1,118 @@
+
+# Name your project! Project names should contain only lowercase characters
+# and underscores. A good package name should reflect your organization's
+# name or the intended use of these models
+name: 'dbt_gx_demo'
+version: '1.0.0'
+config-version: 2
+
+# This setting configures which "profile" dbt uses for this project.
+profile: 'dbt_gx_demo'
+
+# These configurations specify where dbt should look for different types of files.
+# The `model-paths` config, for example, states that models in this project can be
+# found in the "models/" directory. You probably won't need to change these!
+model-paths: ["models"]
+analysis-paths: ["analyses"]
+test-paths: ["tests"]
+seed-paths: ["seeds"]
+macro-paths: ["macros"]
+snapshot-paths: ["snapshots"]
+
+target-path: "target"  # directory which will store compiled SQL files
+clean-targets:         # directories to be removed by `dbt clean`
+  - "target"
+  - "dbt_packages"
+
+
+vars:
+  load_date: '1992-01-08'
+  tpch_size: 10 #1, 10, 100, 1000, 10000
+
+models:
+  +store_failures: true
+  dbt_gx_demo:
+    # Config indicated by + and applies to all files under models/example/
+    bronze:
+      audit:
+        schema: audit
+        tags:
+          - 'audit'
+        raw_stage:
+          +materialized: table
+        raw_vault:
+          +materialized: table
+        stage:
+          +materialized: view
+      demo_build:
+        schema: raw
+        +materialized: table
+        tags:
+          - 'demo_build'
+      processed:
+        schema: processed
+        +materialized: table
+        tags:
+          - 'processed'
+      raw:
+        schema: raw
+        +materialized: table
+        tags:
+          - 'raw'
+        flight_demo:
+          tags:
+            - 'flight_demo'
+        netflix_demo:
+          tags:
+            - 'netflix_demo'
+        sales_demo:
+          tags:
+            - 'sales_demo'
+      stage:
+        schema: stage
+        +materialized: table
+        tags:
+          - 'stage'
+        flight_demo:
+          tags:
+            - 'flight_demo'
+        netflix_demo:
+          tags:
+            - 'netflix_demo'
+        sales_demo:
+          tags:
+            - 'sales_demo'
+    dbt_artifacts:
+      +materialized: table
+      +file_format: delta
+      +database: BRONZE
+      +schema: DBT
+      staging:
+        +database: BRONZE
+        +schema: DBT
+      sources:
+        +materialized: incremental
+        +on_schema_change: append_new_columns
+        +full_refresh: false
+        +database: BRONZE
+        +schema: RAW
+    gold:
+      +materialized: view
+    silver:
+      +materialized: view
+
+seeds:
+  database: BRONZE
+  schema: RAW
+snapshots:
+  database: BRONZE
+  schema: STAGE
+tests:
+  database: BRONZE
+  schema: DBT_EXPECTATIONS_INTEGRATION_TESTS
+
+
+on-run-end:
+  - "{{ log_dbt_results(results) }}"
+  - "{{ dbt_artifacts.upload_results(results) }}"
+

@@ -1,0 +1,3 @@
+SELECT
+{{get_column_name('NETFLIX_BEST_MOVIE_BY_YEAR')}}
+ FROM {{source('NETFLIX','NETFLIX_BEST_MOVIE_BY_YEAR')}}

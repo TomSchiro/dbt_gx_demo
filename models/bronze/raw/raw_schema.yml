@@ -1,0 +1,261 @@
+version: 2
+
+sources:
+  - name: sales_demo
+    database: BRONZE
+    schema: RAW
+    freshness:
+      warn_after: {count: 10, period: minute}
+      error_after: {count: 1, period: hour}
+    loaded_at_field: LOAD_DATE_TIMESTAMP
+    tables:
+      - name: RAW_CUSTOMER_INFO
+        columns:
+          - name: C_CUSTOMER_SK
+          - name: C_CUSTOMER_ID
+          - name: C_SALUTATION
+          - name: C_FIRST_NAME
+          - name: C_LAST_NAME
+          - name: C_BIRTH_DAY
+          - name: C_BIRTH_YEAR
+          - name: C_EMAIL_ADDRESS
+          - name: C_LOGIN
+          - name: CA_ADDRESS_ID
+          - name: CA_STREET_NUMBER
+          - name: CA_STREET_TYPE
+          - name: CA_SUITE_NUMBER
+          - name: CA_CITY
+          - name: CA_COUNTY
+          - name: CA_STATE
+          - name: CA_ZIP
+          - name: CA_COUNTRY
+          - name: CA_GMT_OFFSET
+          - name: CA_LOCATION_TYPE
+          - name: CD_GENDER
+          - name: CD_MARITAL_STATUS
+          - name: CD_EDUCATION_STATUS
+          - name: CD_PURCHASE_ESTIMATE
+          - name: CD_CREDIT_RATING
+          - name: CD_DEP_COUNT
+      - name: RAW_INVENTORY
+        columns:
+          - name: PARTKEY
+          - name: SUPPLIERKEY
+          - name: AVAILQTY
+          - name: SUPPLYCOST
+          - name: PART_SUPPLY_COMMENT
+          - name: SUPPLIER_NAME
+          - name: SUPPLIER_ADDRESS
+          - name: SUPPLIER_NATION_KEY
+          - name: SUPPLIER_PHONE
+          - name: SUPPLIER_ACCTBAL
+          - name: SUPPLIER_COMMENT
+          - name: PART_NAME
+          - name: PART_MFGR
+          - name: PART_BRAND
+          - name: PART_TYPE
+          - name: PART_SIZE
+          - name: PART_CONTAINER
+          - name: PART_RETAILPRICE
+          - name: PART_COMMENT
+          - name: SUPPLIER_NATION_NAME
+          - name: SUPPLIER_NATION_COMMENT
+          - name: SUPPLIER_REGION_KEY
+          - name: SUPPLIER_REGION_NAME
+          - name: SUPPLIER_REGION_COMMENT
+          - name: LOAD_DATE_TIMESTAMP
+      - name: RAW_ORDERS
+        columns:
+          - name: ORDERKEY
+          - name: PARTKEY
+          - name: SUPPLIERKEY
+          - name: LINENUMBER
+          - name: QUANTITY
+          - name: EXTENDEDPRICE
+          - name: TAX
+          - name: RETURNFLAG
+          - name: LINESTATUS
+          - name: SHIPDATE
+          - name: COMMITDATE
+          - name: RECEIPTDATE
+          - name: SHIPMODE
+          - name: LINE_COMMENT
+          - name: CUSTOMERKEY
+          - name: ORDERSTATUS
+          - name: TOTALPRICE
+          - name: ORDERDATE
+          - name: ORDERPRIORITY
+          - name: CLERK
+          - name: SHIPPRIORITY
+          - name: ORDER_COMMENT
+          - name: CUSTOMER_NAME
+          - name: CUSTOMER_ADDRESS
+          - name: CUSTOMER_NATION_KEY
+          - name: CUSTOMER_PHONE
+          - name: CUSTOMER_ACCBAL
+          - name: CUSTOMER_MKTSEGMENT
+          - name: CUSTOMER_COMMENT
+          - name: CUSTOMER_NATION_NAME
+          - name: CUSTOMER_REGION_KEY
+          - name: CUSTOMER_NATION_COMMENT
+          - name: CUSTOMER_NATION_NAME
+          - name: CUSTOMER_REGION_COMMENT
+          - name: LOAD_DATE_TIMESTAMP
+      - name: RAW_TRANSACTIONS
+        columns:
+          - name: ORDER_ID
+          - name: CUSTOMER_ID
+          - name: ORDER_DATE
+          - name: TRANSACTION_DATE
+          - name: TRANSACTION_NUMBER
+          - name: TYPE
+          - name: LOAD_DATE_TIMESTAMP
+  - name: flight_demo
+    database: BRONZE
+    schema: RAW
+    freshness:
+      warn_after: {count: 12, period: hour}
+      error_after: {count: 24, period: hour}
+    loaded_at_field: load_date_timestamp
+    tables:
+      - name: RAW_AIRPORT_INFO
+        columns:
+          - name: IATA_CODE
+          - name: AIRPORT
+          - name: CITY
+          - name: STATE
+          - name: COUNTRY
+          - name: LATITUDE
+          - name: LONGITUDE
+          - name: LOAD_DATE_TIMESTAMP
+      - name: RAW_AIRLINE_INFO
+        columns:
+          - name: IATA_CODE
+          - name: IATA_CODE
+          - name: LOAD_DATE_TIMESTAMP
+      - name: RAW_FLIGHT_INFO
+        columns:
+          - name: YEAR
+          - name: MONTH
+          - name: DAY
+          - name: DAY_OF_WEEK
+          - name: AIRLINE
+          - name: FLIGHT_NUMBER
+          - name: TAIL_NUMBER
+          - name: ORIGIN_AIRPORT
+          - name: DESTINATION_AIRPORT
+          - name: SCHEDULE_DEPARTURE
+          - name: DEPARTURE_TIME
+          - name: DEPARTURE_DELAY
+          - name: TAXI_OUT
+          - name: WHEELS_OFF
+          - name: SCHEDULE_TIME
+          - name: ELAPSED_TIME
+          - name: AIR_TIME
+          - name: DISTANCE
+          - name: WHEELS_ON
+          - name: TAXI_IN
+          - name: SCHEDULE_ARRIVAL
+          - name: ARRIVAL_TIME
+          - name: ARRIVAL_DELAY
+          - name: DIVERTED
+          - name: CANCELLED
+          - name: CANCELLATION_REASON
+          - name: AIR_SYSTEM_DELAY
+          - name: SECURITY_DELAY
+          - name: AIRLINE_DELAY
+          - name: LATE_AIRCRAFT_DELAY
+          - name: WEATHER_DELAY
+          - name: LOAD_DATE_TIMESTAMP
+  - name: NETFLIX
+    database: BRONZE
+    schema: RAW
+    freshness:
+      warn_after: {count: 12, period: hour}
+      error_after: {count: 24, period: hour}
+    loaded_at_field: etl_create_date
+    tables:
+      - name: RAW_NETFLIX_BEST_MOVIE
+        columns:
+          - name: INDEX
+          - name: TITLE
+          - name: RELEASE_YEAR
+          - name: SCORE
+          - name: NUMBER_OF_VOTES
+          - name: DURATION
+          - name: MAIN_GENRE
+          - name: MAIN_PRODUCTION
+          - name: ETL_CREATE_DATE
+      - name: RAW_NETFLIX_BEST_MOVIE_BY_YEAR
+        columns:
+          - name: INDEX
+          - name: TITLE
+          - name: RELEASE_YEAR
+          - name: SCORE
+          - name: MAIN_GENRE
+          - name: MAIN_PRODUCTION
+          - name: ETL_CREATE_DATE
+          - name: MOVIE_BUDGET
+          - name: PRODUCTION_START_DATE
+      - name: RAW_NETFLIX_BEST_SHOW
+        columns:
+          - name: INDEX
+          - name: TITLE
+          - name: RELEASE_YEAR
+          - name: SCORE
+          - name: NUMBER_OF_VOTES
+          - name: DURATION
+          - name: NUMBER_OF_SEASONS
+          - name: MAIN_GENRE
+          - name: MAIN_PRODUCTION
+          - name: ETL_CREATE_DATE
+      - name: RAW_NETFLIX_BEST_SHOW_BY_YEAR
+        columns:
+          - name: INDEX
+          - name: TITLE
+          - name: RELEASE_YEAR
+          - name: SCORE
+          - name: NUMBER_OF_SEASONS
+          - name: MAIN_GENRE
+          - name: MAIN_PRODUCTION
+          - name: ETL_CREATE_DATE
+      - name: RAW_NETFLIX_DATASET_MOVIE
+        columns:
+          - name: MOVIE_ID
+          - name: YEAR
+          - name: NAME
+          - name: ETL_CREATE_DATE
+      - name: RAW_NETFLIX_DATASET_RATING
+        columns:
+          - name: USER_ID
+          - name: RATING
+          - name: MOVIE_ID
+          - name: ETL_CREATE_DATE
+      - name: RAW_NETFLIX_ORIGINALS
+        columns:
+          - name: TITLE
+          - name: GENRE
+          - name: PREMIERE
+          - name: RUNTIME
+          - name: IMDBSCORE
+          - name: LANGUAGE
+          - name: ETL_CREATE_DATE
+      - name: RAW_NETFLIX_RAW_CREDITS
+        columns:
+          - name: INDEX
+          - name: PERSON_ID
+          - name: ID
+          - name: NAME
+          - name: CHARACTER
+          - name: ETL_CREATE_DATE
+      - name: RAW_NETFLIX_RAW_TITLES
+        columns:
+          - name: INDEX
+          - name: ID
+          - name: TITLE
+          - name: TYPE
+          - name: RELEASE_YEAR
+          - name: AGE_CERTIFICATION
+          - name: RUNTIME
+          - name: GENRES
+          - name: ETL_CREATE_DATE
