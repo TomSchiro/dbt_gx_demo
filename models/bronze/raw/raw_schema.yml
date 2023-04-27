@@ -12,7 +12,11 @@ sources:
       - name: RAW_CUSTOMER_INFO
         columns:
           - name: C_CUSTOMER_SK
+            tests:
+              - not_null
           - name: C_CUSTOMER_ID
+            tests:
+              - not_null
           - name: C_SALUTATION
           - name: C_FIRST_NAME
           - name: C_LAST_NAME
@@ -33,6 +37,10 @@ sources:
           - name: CA_LOCATION_TYPE
           - name: CD_GENDER
           - name: CD_MARITAL_STATUS
+            tests:
+              - not_null
+              - accepted_values:
+                  values: ['S', 'D', 'W', 'U', 'M']
           - name: CD_EDUCATION_STATUS
           - name: CD_PURCHASE_ESTIMATE
           - name: CD_CREDIT_RATING
@@ -64,6 +72,11 @@ sources:
           - name: SUPPLIER_REGION_NAME
           - name: SUPPLIER_REGION_COMMENT
           - name: LOAD_DATE_TIMESTAMP
+          - name: LOAD_DATE_TIMESTAMP
+            tests:
+              - dbt_expectations.expect_row_values_to_have_recent_data:
+                  datepart: minute
+                  interval: 1
       - name: RAW_ORDERS
         columns:
           - name: ORDERKEY
@@ -101,6 +114,10 @@ sources:
           - name: CUSTOMER_NATION_NAME
           - name: CUSTOMER_REGION_COMMENT
           - name: LOAD_DATE_TIMESTAMP
+            tests:
+              - dbt_expectations.expect_row_values_to_have_recent_data:
+                  datepart: minute
+                  interval: 1
       - name: RAW_TRANSACTIONS
         columns:
           - name: ORDER_ID
@@ -110,6 +127,10 @@ sources:
           - name: TRANSACTION_NUMBER
           - name: TYPE
           - name: LOAD_DATE_TIMESTAMP
+            tests:
+              - dbt_expectations.expect_row_values_to_have_recent_data:
+                  datepart: minute
+                  interval: 1
   - name: flight_demo
     database: BRONZE
     schema: RAW
@@ -240,7 +261,7 @@ sources:
           - name: IMDBSCORE
           - name: LANGUAGE
           - name: ETL_CREATE_DATE
-      - name: RAW_NETFLIX_RAW_CREDITS
+      - name: RAW_NETFLIX_CREDITS
         columns:
           - name: INDEX
           - name: PERSON_ID
@@ -248,7 +269,7 @@ sources:
           - name: NAME
           - name: CHARACTER
           - name: ETL_CREATE_DATE
-      - name: RAW_NETFLIX_RAW_TITLES
+      - name: RAW_NETFLIX_TITLES
         columns:
           - name: INDEX
           - name: ID

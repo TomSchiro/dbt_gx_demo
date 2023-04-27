@@ -6,7 +6,24 @@ models:
   # that DBT_CONSTRAINTS doesn't try to create constraints multiple times.
   # This also shows how to apply PK/UK tests inline, with one column
   # and with multiple columns
+  - name: hub_customer_info
+    tests:
+      - dbt_expectations.expect_column_to_exist:
+          column_name: "LOAD_DATE"
+      - dbt_expectations.expect_column_to_exist:
+          column_name: "RECORD_SOURCE"
+      - primary_key_validation
+    columns:
+      - name: CUSTOMER_PK
+      - name: CUSTOMERKEY
+      - name: LOAD_DATE
+      - name: CUSTOMER_PK
   - name: hub_customer
+    tests:
+      - dbt_expectations.expect_column_to_exist:
+          column_name: "LOAD_DATE"
+      - dbt_expectations.expect_column_to_exist:
+          column_name: "RECORD_SOURCE"
     columns:
       - name: CUSTOMER_PK
         description: "Primary key for this table"
@@ -15,6 +32,11 @@ models:
           - unique
           - not_null       
   - name: hub_lineitem
+    tests:
+      - dbt_expectations.expect_column_to_exist:
+          column_name: "LOAD_DATE"
+      - dbt_expectations.expect_column_to_exist:
+          column_name: "RECORD_SOURCE"
     columns:
       - name: LINEITEM_PK
         description: "Primary key for this table"
@@ -23,6 +45,11 @@ models:
           - unique
           - not_null
   - name: hub_nation
+    tests:
+      - dbt_expectations.expect_column_to_exist:
+          column_name: "LOAD_DATE"
+      - dbt_expectations.expect_column_to_exist:
+          column_name: "RECORD_SOURCE"
     columns:
       - name: NATION_PK
         description: "Primary key for this table"
@@ -31,6 +58,11 @@ models:
           - unique
           - not_null
   - name: hub_order
+    tests:
+      - dbt_expectations.expect_column_to_exist:
+          column_name: "LOAD_DATE"
+      - dbt_expectations.expect_column_to_exist:
+          column_name: "RECORD_SOURCE"
     columns:
       - name: ORDER_PK
         description: "Primary key for this table"

@@ -1,9 +1,9 @@
-{% macro log_dbt_results(results) %}
+{% macro log_source_results(processed) %}
 
     -- depends_on: {{ ref('failures') }}
 
     {%- if execute -%}
-        {%- set parsed_results = parse_dbt_results(results) -%}
+        {%- set parsed_results = parse_dbt_source_results(processed) -%}
         {%- if parsed_results | length  > 0 -%}
             {% set insert_dbt_results_query -%}
                 insert into {{ ref('failures') }}

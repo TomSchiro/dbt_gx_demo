@@ -29,8 +29,10 @@ vars:
   load_date: '1992-01-08'
   tpch_size: 10 #1, 10, 100, 1000, 10000
 
+  'dbt_date:time_zone': 'America/Chicago'
+
+
 models:
-  +store_failures: true
   dbt_gx_demo:
     # Config indicated by + and applies to all files under models/example/
     bronze:
@@ -43,17 +45,38 @@ models:
         raw_vault:
           +materialized: table
         stage:
+          +pre-hook: "{{ project_governance_check() }}"
           +materialized: view
+          tags:
+            - "governance"
+        flight_demo:
+          tags:
+            - 'flight_demo'
+        sales_demo:
+          tags:
+            - 'sales_demo'
+            - 'stage_sales_demo'
       demo_build:
         schema: raw
         +materialized: table
         tags:
           - 'demo_build'
       processed:
+        +pre-hook: "{{ project_governance_check() }}"
         schema: processed
         +materialized: table
         tags:
           - 'processed'
+        flight_demo:
+          tags:
+            - 'flight_demo'
+        netflix_demo:
+          tags:
+            - 'netflix_demo'
+        sales_demo:
+          tags:
+            - 'sales_demo'
+            - 'processed_sales_demo'
       raw:
         schema: raw
         +materialized: table
@@ -68,11 +91,12 @@ models:
         sales_demo:
           tags:
             - 'sales_demo'
-      stage:
+      staging:
+        +pre-hook: "{{ project_governance_check() }}"
         schema: stage
         +materialized: table
         tags:
-          - 'stage'
+          - 'staging'
         flight_demo:
           tags:
             - 'flight_demo'
@@ -82,6 +106,7 @@ models:
         sales_demo:
           tags:
             - 'sales_demo'
+            - 'staging_sales_demo'
     dbt_artifacts:
       +materialized: table
       +file_format: delta
@@ -108,8 +133,9 @@ snapshots:
   database: BRONZE
   schema: STAGE
 tests:
-  database: BRONZE
-  schema: DBT_EXPECTATIONS_INTEGRATION_TESTS
+  project_governance_check:
+    +database: BRONZE
+    +schema: DBT
 
 
 on-run-end:

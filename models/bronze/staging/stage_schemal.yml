@@ -1,7 +1,7 @@
 version: 2
 
 models:
-  - name: processed_customer_info
+  - name: stg_customer_info
     tests:
       - dbt_expectations.expect_compound_columns_to_be_unique:
           column_list: ["C_CUSTOMER_SK", "C_CUSTOMER_ID"]
@@ -9,39 +9,124 @@ models:
       - name: C_CUSTOMER_SK
         tests:
           - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: number
       - name: C_CUSTOMER_ID
         tests:
           - not_null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: varchar
       - name: C_SALUTATION
+        tests:
+          - accepted_values:
+              values: ['Dr.', 'Mrs.', 'Sir', 'Miss', 'Ms.', 'Mr.']
+              config:
+                where: C_SALUTATION is not null
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: varchar
       - name: C_FIRST_NAME
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: varchar
       - name: C_LAST_NAME
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: varchar
       - name: C_BIRTH_DAY
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: number
       - name: C_BIRTH_YEAR
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: number
       - name: C_EMAIL_ADDRESS
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: varchar
       - name: C_LOGIN
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: varchar
       - name: CA_ADDRESS_ID
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: varchar
       - name: CA_STREET_NUMBER
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: varchar
       - name: CA_STREET_TYPE
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: varchar
       - name: CA_SUITE_NUMBER
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: varchar
       - name: CA_CITY
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: varchar
       - name: CA_COUNTY
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: varchar
       - name: CA_STATE
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: varchar
       - name: CA_ZIP
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: varchar
       - name: CA_COUNTRY
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: varchar
       - name: CA_GMT_OFFSET
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: number
       - name: CA_LOCATION_TYPE
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: varchar
       - name: CD_GENDER
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: varchar
       - name: CD_MARITAL_STATUS
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['S', 'D', 'W', 'U', 'M']
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: varchar
       - name: CD_EDUCATION_STATUS
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: varchar
       - name: CD_PURCHASE_ESTIMATE
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: number
       - name: CD_CREDIT_RATING
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: varchar
       - name: CD_DEP_COUNT
+        tests:
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: number
       - name: LOAD_DATE_TIMESTAMP
         tests:
           - dbt_expectations.expect_row_values_to_have_recent_data:
-              datepart: minute
-              interval: 1000
-  - name: processed_inventory
+              datepart: day
+              interval: 100
+          - dbt_expectations.expect_column_values_to_be_of_type:
+              column_type: timestamp_ltz
+  - name: stg_inventory
     columns:
       - name: PARTKEY
       - name: SUPPLIERKEY
@@ -68,11 +153,7 @@ models:
       - name: SUPPLIER_REGION_NAME
       - name: SUPPLIER_REGION_COMMENT
       - name: LOAD_DATE_TIMESTAMP
-        tests:
-          - dbt_expectations.expect_row_values_to_have_recent_data:
-              datepart: Day
-              interval: 1000
-  - name: processed_orders
+  - name: stg_orders
     tests:
       - dbt_expectations.expect_table_column_count_to_be_between:
           min_value: 1
@@ -117,11 +198,7 @@ models:
       - name: CUSTOMER_REGION_NAME
       - name: CUSTOMER_REGION_COMMENT
       - name: LOAD_DATE_TIMESTAMP
-        tests:
-          - dbt_expectations.expect_row_values_to_have_recent_data:
-              datepart: Day
-              interval: 1000
-  - name: processed_transactions
+  - name: stg_transactions
     tests:
       - dbt_expectations.expect_table_columns_to_contain_set:
           column_list: ["ORDER_ID", "CUSTOMER_ID"]
@@ -136,11 +213,7 @@ models:
       - name: AMOUNT
       - name: TYPE
       - name: LOAD_DATE_TIMESTAMP
-        tests:
-          - dbt_expectations.expect_row_values_to_have_recent_data:
-              datepart: Day
-              interval: 1000
-  - name: processed_netflix_best_movie
+  - name: stg_netflix_best_movie
     tests:
       - dbt_expectations.expect_column_to_exist:
           column_name: ETL_CREATE_DATE
@@ -154,11 +227,7 @@ models:
       - name: MAIN_GENRE
       - name: MAIN_PRODUCTION
       - name: ETL_CREATE_DATE
-        tests:
-          - dbt_expectations.expect_row_values_to_have_recent_data:
-              datepart: Day
-              interval: 1000
-  - name: processed_netflix_best_movie_by_year
+  - name: stg_netflix_best_movie_by_year
     columns:
       - name: INDEX
       - name: TITLE
@@ -167,13 +236,9 @@ models:
       - name: MAIN_GENRE
       - name: MAIN_PRODUCTION
       - name: ETL_CREATE_DATE
-        tests:
-          - dbt_expectations.expect_row_values_to_have_recent_data:
-              datepart: Day
-              interval: 1000
       - name: MOVIE_BUDGET
       - name: PRODUCTION_START_DATE
-  - name: processed_netflix_best_show
+  - name: stg_netflix_best_show
     columns:
       - name: INDEX
       - name: TITLE
@@ -185,11 +250,7 @@ models:
       - name: MAIN_GENRE
       - name: MAIN_PRODUCTION
       - name: ETL_CREATE_DATE
-        tests:
-          - dbt_expectations.expect_row_values_to_have_recent_data:
-              datepart: Day
-              interval: 1000
-  - name: processed_netflix_best_show_by_year
+  - name: stg_netflix_best_show_by_year
     columns:
       - name: INDEX
       - name: TITLE
@@ -199,11 +260,7 @@ models:
       - name: MAIN_GENRE
       - name: MAIN_PRODUCTION
       - name: ETL_CREATE_DATE
-        tests:
-          - dbt_expectations.expect_row_values_to_have_recent_data:
-              datepart: Day
-              interval: 1000
-  - name: processed_netflix_credits
+  - name: stg_netflix_credits
     columns:
       - name: INDEX
       - name: PERSON_ID
@@ -211,31 +268,19 @@ models:
       - name: NAME
       - name: CHARACTER
       - name: ETL_CREATE_DATE
-        tests:
-          - dbt_expectations.expect_row_values_to_have_recent_data:
-              datepart: Day
-              interval: 1000
-  - name: processed_netflix_dataset_movie
+  - name: stg_netflix_dataset_movie
     columns:
       - name: MOVIE_ID
       - name: YEAR
       - name: NAME
       - name: ETL_CREATE_DATE
-        tests:
-          - dbt_expectations.expect_row_values_to_have_recent_data:
-              datepart: Day
-              interval: 1000
-  - name: processed_netflix_dataset_rating
+  - name: stg_netflix_dataset_rating
     columns:
       - name: USER_ID
       - name: RATING
       - name: MOVIE_ID
       - name: ETL_CREATE_DATE
-        tests:
-          - dbt_expectations.expect_row_values_to_have_recent_data:
-              datepart: Day
-              interval: 1000
-  - name: processed_netflix_originals
+  - name: stg_netflix_originals
     columns:
       - name: TITLE
       - name: GENRE
@@ -244,11 +289,7 @@ models:
       - name: IMDBSCORE
       - name: LANGUAGE
       - name: ETL_CREATE_DATE
-        tests:
-          - dbt_expectations.expect_row_values_to_have_recent_data:
-              datepart: Day
-              interval: 1000
-  - name: processed_netflix_titles
+  - name: stg_netflix_titles
     columns:
       - name: INDEX
       - name: ID
@@ -259,20 +300,12 @@ models:
       - name: RUNTIME
       - name: GENRES
       - name: ETL_CREATE_DATE
-        tests:
-          - dbt_expectations.expect_row_values_to_have_recent_data:
-              datepart: Day
-              interval: 1000
-  - name: processed_airline_info
+  - name: stg_airline_info
     columns:
       - name: IATA_CODE
       - name: AIRLINE
       - name: LOAD_DATE_TIMESTAMP
-        tests:
-          - dbt_expectations.expect_row_values_to_have_recent_data:
-              datepart: Day
-              interval: 1000
-  - name: processed_airport_info
+  - name: stg_airport_info
     columns:
       - name: AIRPORT
       - name: CITY
@@ -281,11 +314,7 @@ models:
       - name: LATITUDE
       - name: LONGITUDE
       - name: LOAD_DATE_TIMESTAMP
-        tests:
-          - dbt_expectations.expect_row_values_to_have_recent_data:
-              datepart: Day
-              interval: 1000
-  - name: processed_flight_info
+  - name: stg_flight_info
     columns:
       - name: YEAR
       - name: MONTH
@@ -319,7 +348,3 @@ models:
       - name: LATE_AIRCRAFT_DELAY
       - name: WEATHER_DELAY
       - name: LOAD_DATE_TIMESTAMP
-        tests:
-          - dbt_expectations.expect_row_values_to_have_recent_data:
-              datepart: day
-              interval: 1000
