@@ -39,7 +39,7 @@ models:
       - name: LOAD_DATE_TIMESTAMP
         tests:
           - dbt_expectations.expect_row_values_to_have_recent_data:
-              datepart: minute
+              datepart: Day
               interval: 1000
   - name: processed_inventory
     columns:

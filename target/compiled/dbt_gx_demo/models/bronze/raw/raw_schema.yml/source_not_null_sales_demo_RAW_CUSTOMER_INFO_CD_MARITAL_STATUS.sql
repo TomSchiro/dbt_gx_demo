@@ -1,0 +1,11 @@
+
+    
+    
+
+
+
+select CD_MARITAL_STATUS
+from BRONZE.RAW.RAW_CUSTOMER_INFO
+where CD_MARITAL_STATUS is null
+
+

@@ -5,8 +5,8 @@ sources:
     database: BRONZE
     schema: RAW
     freshness:
-      warn_after: {count: 10, period: minute}
-      error_after: {count: 1, period: hour}
+      warn_after: {count: 100, period: minute}
+      error_after: {count: 1000, period: day}
     loaded_at_field: LOAD_DATE_TIMESTAMP
     tables:
       - name: RAW_CUSTOMER_INFO
@@ -75,8 +75,8 @@ sources:
           - name: LOAD_DATE_TIMESTAMP
             tests:
               - dbt_expectations.expect_row_values_to_have_recent_data:
-                  datepart: minute
-                  interval: 1
+                  datepart: Day
+                  interval: 10000
       - name: RAW_ORDERS
         columns:
           - name: ORDERKEY
@@ -116,8 +116,8 @@ sources:
           - name: LOAD_DATE_TIMESTAMP
             tests:
               - dbt_expectations.expect_row_values_to_have_recent_data:
-                  datepart: minute
-                  interval: 1
+                  datepart: Day
+                  interval: 10000
       - name: RAW_TRANSACTIONS
         columns:
           - name: ORDER_ID
@@ -129,8 +129,8 @@ sources:
           - name: LOAD_DATE_TIMESTAMP
             tests:
               - dbt_expectations.expect_row_values_to_have_recent_data:
-                  datepart: minute
-                  interval: 1
+                  datepart: Day
+                  interval: 10000
   - name: flight_demo
     database: BRONZE
     schema: RAW

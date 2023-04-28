@@ -1,0 +1,35 @@
+
+  
+    
+
+        create or replace transient table BRONZE.processed.processed_inventory  as
+        (SELECT
+    PARTKEY,
+    SUPPLIERKEY,
+    AVAILQTY,
+    SUPPLYCOST,
+    PART_SUPPLY_COMMENT,
+    SUPPLIER_NAME,
+    SUPPLIER_ADDRESS,
+    SUPPLIER_NATION_KEY,
+    SUPPLIER_PHONE,
+    SUPPLIER_ACCTBAL,
+    SUPPLIER_COMMENT,
+    PART_NAME,
+    PART_MFGR,
+    PART_BRAND,
+    PART_TYPE,
+    PART_SIZE,
+    PART_CONTAINER,
+    PART_RETAILPRICE,
+    PART_COMMENT,
+    SUPPLIER_NATION_NAME,
+    SUPPLIER_NATION_COMMENT,
+    SUPPLIER_REGION_KEY,
+    SUPPLIER_REGION_NAME,
+    SUPPLIER_REGION_COMMENT,
+    LOAD_DATE_TIMESTAMP
+FROM BRONZE.raw.raw_inventory
+        );
+      
+  
