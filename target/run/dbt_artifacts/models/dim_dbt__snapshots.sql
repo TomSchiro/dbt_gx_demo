@@ -1,9 +1,8 @@
 
+  create or replace  view BRONZE.DBT.dim_dbt__snapshots
   
-    
-
-        create or replace transient table BRONZE.DBT.dim_dbt__snapshots  as
-        (with base as (
+   as (
+    with base as (
 
     select *
     from BRONZE.DBT.stg_dbt__snapshots
@@ -32,6 +31,4 @@ snapshots as (
 )
 
 select * from snapshots
-        );
-      
-  
+  );

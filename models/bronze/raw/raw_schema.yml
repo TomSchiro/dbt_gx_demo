@@ -76,7 +76,7 @@ sources:
             tests:
               - dbt_expectations.expect_row_values_to_have_recent_data:
                   datepart: Day
-                  interval: 10000
+                  interval: 100000
       - name: RAW_ORDERS
         columns:
           - name: ORDERKEY

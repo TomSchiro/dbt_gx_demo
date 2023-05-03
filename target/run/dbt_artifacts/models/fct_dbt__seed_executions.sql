@@ -1,9 +1,8 @@
 
+  create or replace  view BRONZE.DBT.fct_dbt__seed_executions
   
-    
-
-        create or replace transient table BRONZE.DBT.fct_dbt__seed_executions  as
-        (with base as (
+   as (
+    with base as (
 
     select *
     from BRONZE.DBT.stg_dbt__seed_executions
@@ -33,6 +32,4 @@ seed_executions as (
 )
 
 select * from seed_executions
-        );
-      
-  
+  );

@@ -1,9 +1,8 @@
 
+  create or replace  view BRONZE.DBT.fct_dbt__invocations
   
-    
-
-        create or replace transient table BRONZE.DBT.fct_dbt__invocations  as
-        (with base as (
+   as (
+    with base as (
 
     select *
     from BRONZE.DBT.stg_dbt__invocations
@@ -37,6 +36,4 @@ invocations as (
 )
 
 select * from invocations
-        );
-      
-  
+  );

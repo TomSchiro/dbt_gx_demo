@@ -1,9 +1,8 @@
 
+  create or replace  view BRONZE.DBT.stg_dbt__snapshot_executions
   
-    
-
-        create or replace transient table BRONZE.DBT.stg_dbt__snapshot_executions  as
-        (with base as (
+   as (
+    with base as (
 
     select *
     from BRONZE.DBT.snapshot_executions
@@ -41,6 +40,4 @@ enhanced as (
 )
 
 select * from enhanced
-        );
-      
-  
+  );

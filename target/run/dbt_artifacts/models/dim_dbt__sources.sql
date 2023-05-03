@@ -1,9 +1,8 @@
 
+  create or replace  view BRONZE.DBT.dim_dbt__sources
   
-    
-
-        create or replace transient table BRONZE.DBT.dim_dbt__sources  as
-        (with base as (
+   as (
+    with base as (
 
     select *
     from BRONZE.DBT.stg_dbt__sources
@@ -30,6 +29,4 @@ sources as (
 )
 
 select * from sources
-        );
-      
-  
+  );

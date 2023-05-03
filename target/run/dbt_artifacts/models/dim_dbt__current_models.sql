@@ -1,9 +1,8 @@
 
+  create or replace  view BRONZE.DBT.dim_dbt__current_models
   
-    
-
-        create or replace transient table BRONZE.DBT.dim_dbt__current_models  as
-        (with base as (
+   as (
+    with base as (
     select *
     from BRONZE.DBT.stg_dbt__models
 ),
@@ -72,6 +71,4 @@ final as (
 )
 
 select * from final
-        );
-      
-  
+  );

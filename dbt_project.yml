@@ -108,7 +108,7 @@ models:
             - 'sales_demo'
             - 'staging_sales_demo'
     dbt_artifacts:
-      +materialized: table
+      +materialized: view
       +file_format: delta
       +database: BRONZE
       +schema: DBT
@@ -140,4 +140,3 @@ tests:
 on-run-end:
   - "{{ log_dbt_results(results) }}"
   - "{{ dbt_artifacts.upload_results(results) }}"
-

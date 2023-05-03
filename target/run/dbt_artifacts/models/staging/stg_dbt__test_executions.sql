@@ -1,9 +1,8 @@
 
+  create or replace  view BRONZE.DBT.stg_dbt__test_executions
   
-    
-
-        create or replace transient table BRONZE.DBT.stg_dbt__test_executions  as
-        (with base as (
+   as (
+    with base as (
 
     select *
     from BRONZE.DBT.test_executions
@@ -38,6 +37,4 @@ enhanced as (
 )
 
 select * from enhanced
-        );
-      
-  
+  );

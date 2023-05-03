@@ -1,9 +1,8 @@
 
+  create or replace  view BRONZE.DBT.stg_dbt__seeds
   
-    
-
-        create or replace transient table BRONZE.DBT.stg_dbt__seeds  as
-        (with base as (
+   as (
+    with base as (
 
     select *
     from BRONZE.DBT.seeds
@@ -30,6 +29,4 @@ enhanced as (
 )
 
 select * from enhanced
-        );
-      
-  
+  );
