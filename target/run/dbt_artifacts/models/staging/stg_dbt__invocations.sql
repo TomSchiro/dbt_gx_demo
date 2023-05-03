@@ -1,11 +1,12 @@
 
-  create or replace   view BRONZE.LANDING.stg_dbt__invocations
   
-   as (
-    with base as (
+    
+
+        create or replace transient table BRONZE.DBT.stg_dbt__invocations  as
+        (with base as (
 
     select *
-    from BRONZE.LANDING.invocations
+    from BRONZE.DBT.invocations
 
 ),
 
@@ -36,5 +37,6 @@ enhanced as (
 )
 
 select * from enhanced
-  );
-
+        );
+      
+  

@@ -1,11 +1,12 @@
 
-  create or replace   view BRONZE.LANDING.stg_dbt__snapshots
   
-   as (
-    with base as (
+    
+
+        create or replace transient table BRONZE.DBT.stg_dbt__snapshots  as
+        (with base as (
 
     select *
-    from BRONZE.LANDING.snapshots
+    from BRONZE.DBT.snapshots
 
 ),
 
@@ -31,5 +32,6 @@ enhanced as (
 )
 
 select * from enhanced
-  );
-
+        );
+      
+  

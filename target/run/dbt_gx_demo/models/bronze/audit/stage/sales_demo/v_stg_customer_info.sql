@@ -1,5 +1,5 @@
 
-  create or replace   view BRONZE.audit.v_stg_customer_info
+  create or replace  view BRONZE.audit.v_stg_customer_info
   
    as (
     
@@ -201,4 +201,3 @@ SELECT *,
        CURRENT_TIMESTAMP() AS EFFECTIVE_FROM      
 FROM staging
   );
-

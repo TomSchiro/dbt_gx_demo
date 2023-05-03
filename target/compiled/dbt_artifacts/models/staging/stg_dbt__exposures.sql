@@ -1,7 +1,7 @@
 with base as (
 
     select *
-    from BRONZE.LANDING.exposures
+    from BRONZE.DBT.exposures
 
 ),
 

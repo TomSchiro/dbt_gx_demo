@@ -1,11 +1,12 @@
 
-  create or replace   view BRONZE.LANDING.stg_dbt__sources
   
-   as (
-    with base as (
+    
+
+        create or replace transient table BRONZE.DBT.stg_dbt__sources  as
+        (with base as (
 
     select *
-    from BRONZE.LANDING.sources
+    from BRONZE.DBT.sources
 
 ),
 
@@ -29,5 +30,6 @@ enhanced as (
 )
 
 select * from enhanced
-  );
-
+        );
+      
+  

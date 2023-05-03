@@ -1,11 +1,12 @@
 
-  create or replace   view BRONZE.LANDING.stg_dbt__seed_executions
   
-   as (
-    with base as (
+    
+
+        create or replace transient table BRONZE.DBT.stg_dbt__seed_executions  as
+        (with base as (
 
     select *
-    from BRONZE.LANDING.seed_executions
+    from BRONZE.DBT.seed_executions
 
 ),
 
@@ -40,5 +41,6 @@ enhanced as (
 )
 
 select * from enhanced
-  );
-
+        );
+      
+  

@@ -1,30 +1,28 @@
--- back compat for old kwarg name
+
   
-  begin;
-    
-        
-            
-            
-        
     
 
-    
+        create or replace  table BRONZE.DBT.failures  as
+        (
 
-    merge into BRONZE.DBT.failures as DBT_INTERNAL_DEST
-        using BRONZE.DBT.failures__dbt_tmp as DBT_INTERNAL_SOURCE
-        on (
-                DBT_INTERNAL_SOURCE.result_id = DBT_INTERNAL_DEST.result_id
-            )
+with empty_table as (
+    select
+        null as result_id,
+        null as invocation_id,
+        null as unique_id,
+        null as database_name,
+        null as schema_name,
+        null as name,
+        null as resource_type,
+        null as status,
+        cast(null as float) as execution_time,
+        cast(null as int) as rows_affected,
+        null as error_message
+)
 
-    
-    when matched then update set
-        "RESULT_ID" = DBT_INTERNAL_SOURCE."RESULT_ID","INVOCATION_ID" = DBT_INTERNAL_SOURCE."INVOCATION_ID","UNIQUE_ID" = DBT_INTERNAL_SOURCE."UNIQUE_ID","DATABASE_NAME" = DBT_INTERNAL_SOURCE."DATABASE_NAME","SCHEMA_NAME" = DBT_INTERNAL_SOURCE."SCHEMA_NAME","NAME" = DBT_INTERNAL_SOURCE."NAME","RESOURCE_TYPE" = DBT_INTERNAL_SOURCE."RESOURCE_TYPE","STATUS" = DBT_INTERNAL_SOURCE."STATUS","EXECUTION_TIME" = DBT_INTERNAL_SOURCE."EXECUTION_TIME","ROWS_AFFECTED" = DBT_INTERNAL_SOURCE."ROWS_AFFECTED","ERROR_MESSAGE" = DBT_INTERNAL_SOURCE."ERROR_MESSAGE"
-    
-
-    when not matched then insert
-        ("RESULT_ID", "INVOCATION_ID", "UNIQUE_ID", "DATABASE_NAME", "SCHEMA_NAME", "NAME", "RESOURCE_TYPE", "STATUS", "EXECUTION_TIME", "ROWS_AFFECTED", "ERROR_MESSAGE")
-    values
-        ("RESULT_ID", "INVOCATION_ID", "UNIQUE_ID", "DATABASE_NAME", "SCHEMA_NAME", "NAME", "RESOURCE_TYPE", "STATUS", "EXECUTION_TIME", "ROWS_AFFECTED", "ERROR_MESSAGE")
-
-;
-    commit;
+select * from empty_table
+-- This is a filter so we will never actually insert these values
+where 1 = 0
+        );
+      
+  

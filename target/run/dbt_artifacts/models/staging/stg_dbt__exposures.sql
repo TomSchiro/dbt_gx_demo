@@ -1,11 +1,12 @@
 
-  create or replace   view BRONZE.LANDING.stg_dbt__exposures
   
-   as (
-    with base as (
+    
+
+        create or replace transient table BRONZE.DBT.stg_dbt__exposures  as
+        (with base as (
 
     select *
-    from BRONZE.LANDING.exposures
+    from BRONZE.DBT.exposures
 
 ),
 
@@ -30,5 +31,6 @@ enhanced as (
 )
 
 select * from enhanced
-  );
-
+        );
+      
+  

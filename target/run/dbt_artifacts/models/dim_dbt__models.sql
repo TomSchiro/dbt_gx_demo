@@ -1,11 +1,12 @@
 
-  create or replace   view BRONZE.LANDING.dim_dbt__models
   
-   as (
-    with base as (
+    
+
+        create or replace transient table BRONZE.DBT.dim_dbt__models  as
+        (with base as (
 
     select *
-    from BRONZE.LANDING.stg_dbt__models
+    from BRONZE.DBT.stg_dbt__models
 
 ),
 
@@ -32,5 +33,6 @@ models as (
 )
 
 select * from models
-  );
-
+        );
+      
+  

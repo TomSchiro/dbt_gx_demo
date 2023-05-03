@@ -120,7 +120,7 @@ models:
         +on_schema_change: append_new_columns
         +full_refresh: false
         +database: BRONZE
-        +schema: RAW
+        +schema: DBT
     gold:
       +materialized: view
     silver:
@@ -136,7 +136,6 @@ tests:
   project_governance_check:
     +database: BRONZE
     +schema: DBT
-
 
 on-run-end:
   - "{{ log_dbt_results(results) }}"
