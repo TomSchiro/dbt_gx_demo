@@ -1,5 +1,5 @@
 
-  create or replace  view BRONZE.DBT.fct_dbt__seed_executions
+  create or replace   view BRONZE.DBT.fct_dbt__seed_executions
   
    as (
     with base as (
@@ -33,3 +33,4 @@ seed_executions as (
 
 select * from seed_executions
   );
+

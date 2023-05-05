@@ -1,5 +1,5 @@
 
-  create or replace  view BRONZE.DBT.dim_dbt__snapshots
+  create or replace   view BRONZE.DBT.dim_dbt__snapshots
   
    as (
     with base as (
@@ -32,3 +32,4 @@ snapshots as (
 
 select * from snapshots
   );
+

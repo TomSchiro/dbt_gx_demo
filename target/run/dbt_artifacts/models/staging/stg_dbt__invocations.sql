@@ -1,5 +1,5 @@
 
-  create or replace  view BRONZE.DBT.stg_dbt__invocations
+  create or replace   view BRONZE.DBT.stg_dbt__invocations
   
    as (
     with base as (
@@ -37,3 +37,4 @@ enhanced as (
 
 select * from enhanced
   );
+

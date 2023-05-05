@@ -1,5 +1,5 @@
 
-  create or replace  view BRONZE.audit.v_stg_orders
+  create or replace   view BRONZE.audit.v_stg_orders
   
    as (
     
@@ -355,3 +355,4 @@ SELECT *,
        CURRENT_TIMESTAMP() AS LOAD_DATE   
 FROM staging
   );
+

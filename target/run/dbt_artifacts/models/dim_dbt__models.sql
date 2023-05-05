@@ -1,5 +1,5 @@
 
-  create or replace  view BRONZE.DBT.dim_dbt__models
+  create or replace   view BRONZE.DBT.dim_dbt__models
   
    as (
     with base as (
@@ -33,3 +33,4 @@ models as (
 
 select * from models
   );
+

@@ -1,5 +1,5 @@
 
-  create or replace  view BRONZE.DBT.stg_dbt__exposures
+  create or replace   view BRONZE.DBT.stg_dbt__exposures
   
    as (
     with base as (
@@ -31,3 +31,4 @@ enhanced as (
 
 select * from enhanced
   );
+

@@ -1,5 +1,5 @@
 
-  create or replace  view BRONZE.DBT.stg_dbt__seeds
+  create or replace   view BRONZE.DBT.stg_dbt__seeds
   
    as (
     with base as (
@@ -30,3 +30,4 @@ enhanced as (
 
 select * from enhanced
   );
+

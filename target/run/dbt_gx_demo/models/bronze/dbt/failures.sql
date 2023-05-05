@@ -2,7 +2,8 @@
   
     
 
-        create or replace  table BRONZE.DBT.failures  as
+        create or replace  table BRONZE.DBT.failures
+         as
         (
 
 with empty_table as (

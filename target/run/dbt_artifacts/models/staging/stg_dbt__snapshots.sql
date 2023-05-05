@@ -1,5 +1,5 @@
 
-  create or replace  view BRONZE.DBT.stg_dbt__snapshots
+  create or replace   view BRONZE.DBT.stg_dbt__snapshots
   
    as (
     with base as (
@@ -32,3 +32,4 @@ enhanced as (
 
 select * from enhanced
   );
+

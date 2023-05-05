@@ -2,7 +2,8 @@
   
     
 
-        create or replace transient table BRONZE.raw.raw_customer_info  as
+        create or replace transient table BRONZE.raw.raw_customer_info
+         as
         (SELECT 
     cust.C_CUSTOMER_SK,
     cust.C_CUSTOMER_ID,

@@ -1,5 +1,5 @@
 
-  create or replace  view BRONZE.audit.v_stg_transactions
+  create or replace   view BRONZE.audit.v_stg_transactions
   
    as (
     
@@ -101,3 +101,4 @@ columns_to_select AS (
 
 SELECT * FROM columns_to_select
   );
+

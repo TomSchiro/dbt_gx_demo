@@ -1,5 +1,5 @@
 
-  create or replace  view BRONZE.DBT.fct_dbt__invocations
+  create or replace   view BRONZE.DBT.fct_dbt__invocations
   
    as (
     with base as (
@@ -37,3 +37,4 @@ invocations as (
 
 select * from invocations
   );
+

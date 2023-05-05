@@ -2,7 +2,8 @@
   
     
 
-        create or replace transient table BRONZE.raw.raw_orders  as
+        create or replace transient table BRONZE.raw.raw_orders
+         as
         (SELECT
     a.L_ORDERKEY AS ORDERKEY,
     a.L_PARTKEY AS PARTKEY ,

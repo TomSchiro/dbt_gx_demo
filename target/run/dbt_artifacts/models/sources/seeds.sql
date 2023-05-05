@@ -1,4 +1,6 @@
-begin;
+-- back compat for old kwarg name
+  
+  begin;
     
 
         insert into BRONZE.DBT.seeds ("COMMAND_INVOCATION_ID", "NODE_ID", "RUN_STARTED_AT", "DATABASE", "SCHEMA", "NAME", "PACKAGE_NAME", "PATH", "CHECKSUM", "META", "ALIAS")

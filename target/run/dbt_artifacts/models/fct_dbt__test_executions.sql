@@ -1,5 +1,5 @@
 
-  create or replace  view BRONZE.DBT.fct_dbt__test_executions
+  create or replace   view BRONZE.DBT.fct_dbt__test_executions
   
    as (
     with base as (
@@ -30,3 +30,4 @@ test_executions as (
 
 select * from test_executions
   );
+

@@ -1,5 +1,5 @@
 
-  create or replace  view BRONZE.DBT.fct_dbt__snapshot_executions
+  create or replace   view BRONZE.DBT.fct_dbt__snapshot_executions
   
    as (
     with base as (
@@ -33,3 +33,4 @@ snapshot_executions as (
 
 select * from snapshot_executions
   );
+

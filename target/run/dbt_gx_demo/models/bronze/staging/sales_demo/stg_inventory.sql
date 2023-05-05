@@ -2,7 +2,8 @@
   
     
 
-        create or replace transient table BRONZE.stage.stg_inventory  as
+        create or replace transient table BRONZE.stage.stg_inventory
+         as
         (SELECT
     PARTKEY,
     SUPPLIERKEY,

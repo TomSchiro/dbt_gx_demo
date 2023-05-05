@@ -2,7 +2,8 @@
   
     
 
-        create or replace transient table BRONZE.stage.stg_orders  as
+        create or replace transient table BRONZE.stage.stg_orders
+         as
         (SELECT
     ORDERKEY,
     PARTKEY ,

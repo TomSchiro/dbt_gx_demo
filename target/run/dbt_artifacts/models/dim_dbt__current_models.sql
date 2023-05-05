@@ -1,5 +1,5 @@
 
-  create or replace  view BRONZE.DBT.dim_dbt__current_models
+  create or replace   view BRONZE.DBT.dim_dbt__current_models
   
    as (
     with base as (
@@ -72,3 +72,4 @@ final as (
 
 select * from final
   );
+

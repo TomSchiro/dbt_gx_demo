@@ -2,7 +2,8 @@
   
     
 
-        create or replace transient table BRONZE.stage.stg_netflix_best_movie_by_year  as
+        create or replace transient table BRONZE.stage.stg_netflix_best_movie_by_year
+         as
         (SELECT
 
 

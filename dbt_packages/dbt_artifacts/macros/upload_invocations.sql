@@ -3,6 +3,13 @@
 {%- endmacro %}
 
 {% macro default__get_invocations_dml_sql() -%}
+
+{%- set override = [{
+                  'tjs' : "empty",
+                  'cjs' : "empty",
+               }]
+-%}
+
     {% set invocation_values %}
     select
         {{ adapter.dispatch('column_identifier', 'dbt_artifacts')(1) }},
@@ -63,7 +70,8 @@
             null, {# dbt_vars #}
         {% endif %}
 
-        '{{ tojson(invocation_args_dict) | replace('\\', '\\\\') }}', {# invocation_args #}
+
+        '{{ tojson(dbt_metadata_envs) }}', {# invocation_args #}
         '{{ tojson(dbt_metadata_envs) }}' {# dbt_custom_envs #}
 
     )

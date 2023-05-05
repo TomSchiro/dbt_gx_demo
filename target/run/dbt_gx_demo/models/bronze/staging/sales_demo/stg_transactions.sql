@@ -2,7 +2,8 @@
   
     
 
-        create or replace transient table BRONZE.stage.stg_transactions  as
+        create or replace transient table BRONZE.stage.stg_transactions
+         as
         (SELECT
     ORDER_ID,
     CUSTOMER_ID,

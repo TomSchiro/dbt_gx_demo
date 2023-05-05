@@ -1,5 +1,5 @@
 
-  create or replace  view BRONZE.audit.v_stg_inventory
+  create or replace   view BRONZE.audit.v_stg_inventory
   
    as (
     
@@ -247,3 +247,4 @@ SELECT *,
        CURRENT_TIMESTAMP() AS EFFECTIVE_FROM      
 FROM staging
   );
+

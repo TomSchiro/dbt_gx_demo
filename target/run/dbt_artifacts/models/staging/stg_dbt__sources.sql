@@ -1,5 +1,5 @@
 
-  create or replace  view BRONZE.DBT.stg_dbt__sources
+  create or replace   view BRONZE.DBT.stg_dbt__sources
   
    as (
     with base as (
@@ -30,3 +30,4 @@ enhanced as (
 
 select * from enhanced
   );
+

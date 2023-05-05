@@ -2,7 +2,8 @@
   
     
 
-        create or replace transient table BRONZE.raw.raw_inventory  as
+        create or replace transient table BRONZE.raw.raw_inventory
+         as
         (SELECT
     a.PS_PARTKEY AS PARTKEY,
     a.PS_SUPPKEY AS SUPPLIERKEY,

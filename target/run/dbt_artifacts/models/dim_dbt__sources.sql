@@ -1,5 +1,5 @@
 
-  create or replace  view BRONZE.DBT.dim_dbt__sources
+  create or replace   view BRONZE.DBT.dim_dbt__sources
   
    as (
     with base as (
@@ -30,3 +30,4 @@ sources as (
 
 select * from sources
   );
+

@@ -2,7 +2,8 @@
   
     
 
-        create or replace transient table BRONZE.raw.raw_transactions  as
+        create or replace transient table BRONZE.raw.raw_transactions
+         as
         (SELECT
     b.O_ORDERKEY AS ORDER_ID,
     b.O_CUSTKEY AS CUSTOMER_ID,
