@@ -16,3 +16,6 @@ packages:
 
   - package: brooklyn-data/dbt_artifacts
     version: 2.2.2
+
+  - package: dbt-labs/codegen
+    version: 0.9.0
