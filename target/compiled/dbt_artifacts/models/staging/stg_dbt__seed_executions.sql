@@ -1,7 +1,7 @@
 with base as (
 
     select *
-    from BRONZE.DBT.seed_executions
+    from BRONZE.LANDING.seed_executions
 
 ),
 

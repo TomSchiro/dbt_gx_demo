@@ -1,7 +1,7 @@
 with base as (
 
     select *
-    from BRONZE.DBT.sources
+    from BRONZE.LANDING.sources
 
 ),
 

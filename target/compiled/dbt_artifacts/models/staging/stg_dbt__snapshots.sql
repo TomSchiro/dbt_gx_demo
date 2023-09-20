@@ -1,7 +1,7 @@
 with base as (
 
     select *
-    from BRONZE.DBT.snapshots
+    from BRONZE.LANDING.snapshots
 
 ),
 

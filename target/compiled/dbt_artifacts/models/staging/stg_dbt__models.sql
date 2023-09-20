@@ -1,7 +1,7 @@
 with base as (
 
     select *
-    from BRONZE.DBT.models
+    from BRONZE.LANDING.models
 
 ),
 

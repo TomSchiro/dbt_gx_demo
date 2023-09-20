@@ -323,3 +323,30 @@ models:
           - dbt_expectations.expect_row_values_to_have_recent_data:
               datepart: day
               interval: 1000
+
+
+semantic_models:
+  - name: orders
+    model: ref('processed_orders')
+    description: "Test"
+    defaults:
+        agg_time_dimension: orderdate
+
+    entities:
+      - name: line_number
+        type: primary
+        expr: LINENUMBER
+
+      - name: order_number
+        type: primary
+        expr: ORDERKEY
+
+    dimensions:
+      - name: dim_order_date
+        type: time
+        type_params:
+            time_granularity: day
+
+      - name: dim_order_status
+        type: categorical
+        expr: ORDERSTATUS

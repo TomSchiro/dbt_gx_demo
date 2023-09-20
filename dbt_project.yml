@@ -126,17 +126,6 @@ models:
     silver:
       +materialized: view
 
-seeds:
-  database: BRONZE
-  schema: RAW
-snapshots:
-  database: BRONZE
-  schema: STAGE
-tests:
-  project_governance_check:
-    +database: BRONZE
-    +schema: DBT
 
-on-run-end:
-  - "{{ log_dbt_results(results) }}"
-  - "{{ dbt_artifacts.upload_results(results) }}"
+
+
