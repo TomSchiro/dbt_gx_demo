@@ -2,8 +2,7 @@
   
     
 
-        create or replace transient table BRONZE.processed.processed_orders
-         as
+        create or replace transient table BRONZE.processed.processed_orders  as
         (SELECT
     ORDERKEY,
     PARTKEY ,

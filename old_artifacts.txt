@@ -2,7 +2,7 @@ on-run-end:
   - "{{ log_dbt_results(results) }}"
   - "{{ dbt_artifacts.upload_results(results) }}"
 
-  seeds:
+seeds:
   database: BRONZE
   schema: RAW
 snapshots:

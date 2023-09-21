@@ -300,4 +300,51 @@ models:
       - name: RUNTIME
       - name: GENRES
       - name: ETL_CREATE_DATE
- 
+  - name: stg_airline_info
+    columns:
+      - name: IATA_CODE
+      - name: AIRLINE
+      - name: LOAD_DATE_TIMESTAMP
+  - name: stg_airport_info
+    columns:
+      - name: AIRPORT
+      - name: CITY
+      - name: STATE
+      - name: COUNTRY
+      - name: LATITUDE
+      - name: LONGITUDE
+      - name: LOAD_DATE_TIMESTAMP
+  - name: stg_flight_info
+    columns:
+      - name: YEAR
+      - name: MONTH
+      - name: DAY
+      - name: DAY_OF_WEEK
+      - name: AIRLINE
+      - name: FLIGHT_NUMBER
+      - name: TAIL_NUMBER
+      - name: ORIGIN_AIRPORT
+      - name: DESTINATION_AIRPORT
+      - name: SCHEDULE_DEPARTURE
+      - name: DEPARTURE_TIME
+      - name: DEPARTURE_DELAY
+      - name: TAXI_OUT
+      - name: WHEELS_OFF
+      - name: SCHEDULE_TIME
+      - name: ELAPSED_TIME
+      - name: AIR_TIME
+      - name: DISTANCE
+      - name: WHEELS_ON
+      - name: TAXI_IN
+      - name: SCHEDULE_ARRIVAL
+      - name: ARRIVAL_TIME
+      - name: ARRIVAL_DELAY
+      - name: DIVERTED
+      - name: CANCELLED
+      - name: CANCELLATION_REASON
+      - name: AIR_SYSTEM_DELAY
+      - name: SECURITY_DELAY
+      - name: AIRLINE_DELAY
+      - name: LATE_AIRCRAFT_DELAY
+      - name: WEATHER_DELAY
+      - name: LOAD_DATE_TIMESTAMP

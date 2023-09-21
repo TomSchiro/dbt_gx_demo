@@ -1,11 +1,31 @@
--- back compat for old kwarg name
+
   
-  begin;
     
 
-        insert into BRONZE.DBT.sources ("COMMAND_INVOCATION_ID", "NODE_ID", "RUN_STARTED_AT", "DATABASE", "SCHEMA", "SOURCE_NAME", "LOADER", "NAME", "IDENTIFIER", "LOADED_AT_FIELD", "FRESHNESS")
-        (
-            select "COMMAND_INVOCATION_ID", "NODE_ID", "RUN_STARTED_AT", "DATABASE", "SCHEMA", "SOURCE_NAME", "LOADER", "NAME", "IDENTIFIER", "LOADED_AT_FIELD", "FRESHNESS"
-            from BRONZE.DBT.sources__dbt_tmp
+        create or replace transient table BRONZE.OBSERVABILITY.sources  as
+        (/* Bigquery won't let us `where` without `from` so we use this workaround */
+with dummy_cte as (
+    select 1 as foo
+)
+
+select
+    cast(null as TEXT) as command_invocation_id,
+    cast(null as TEXT) as node_id,
+    cast(null as TIMESTAMP) as run_started_at,
+    cast(null as TEXT) as database,
+    cast(null as TEXT) as schema,
+    cast(null as TEXT) as source_name,
+    cast(null as TEXT) as loader,
+    cast(null as TEXT) as name,
+    cast(null as TEXT) as identifier,
+    cast(null as TEXT) as loaded_at_field,
+    
+        cast(null as 
+   ARRAY
+) as freshness
+    
+from dummy_cte
+where 1 = 0
         );
-    commit;
+      
+  

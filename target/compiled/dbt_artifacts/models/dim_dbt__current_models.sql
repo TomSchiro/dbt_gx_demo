@@ -1,11 +1,11 @@
 with base as (
     select *
-    from BRONZE.LANDING.stg_dbt__models
+    from BRONZE.OBSERVABILITY.stg_dbt__models
 ),
 
 model_executions as (
     select *
-    from BRONZE.LANDING.stg_dbt__model_executions
+    from BRONZE.OBSERVABILITY.stg_dbt__model_executions
 ),
 
 latest_models as (

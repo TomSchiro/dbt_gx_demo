@@ -127,5 +127,6 @@ models:
       +materialized: view
 
 
-
-
+on-run-end:
+  - "{{ log_dbt_results(results) }}"
+  - "{{ dbt_artifacts.upload_results(results) }}"

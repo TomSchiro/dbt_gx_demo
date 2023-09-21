@@ -1,11 +1,11 @@
 
-  create or replace   view BRONZE.DBT.stg_dbt__seed_executions
+  create or replace   view BRONZE.OBSERVABILITY.stg_dbt__seed_executions
   
    as (
     with base as (
 
     select *
-    from BRONZE.DBT.seed_executions
+    from BRONZE.OBSERVABILITY.seed_executions
 
 ),
 

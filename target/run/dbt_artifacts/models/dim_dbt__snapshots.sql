@@ -1,11 +1,11 @@
 
-  create or replace   view BRONZE.DBT.dim_dbt__snapshots
+  create or replace   view BRONZE.OBSERVABILITY.dim_dbt__snapshots
   
    as (
     with base as (
 
     select *
-    from BRONZE.DBT.stg_dbt__snapshots
+    from BRONZE.OBSERVABILITY.stg_dbt__snapshots
 
 ),
 

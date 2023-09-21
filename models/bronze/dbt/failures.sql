@@ -4,7 +4,7 @@
     transient = False,
     unique_key = 'result_id',
     database = 'BRONZE',
-    schema = 'DBT'
+    schema = 'OBSERVABILITY'
   )
 }}
 

@@ -2,8 +2,7 @@
   
     
 
-        create or replace transient table BRONZE.processed.processed_transactions
-         as
+        create or replace transient table BRONZE.processed.processed_transactions  as
         (SELECT
     ORDER_ID,
     CUSTOMER_ID,

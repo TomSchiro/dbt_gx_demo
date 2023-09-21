@@ -1,11 +1,29 @@
--- back compat for old kwarg name
+
   
-  begin;
     
 
-        insert into BRONZE.DBT.seeds ("COMMAND_INVOCATION_ID", "NODE_ID", "RUN_STARTED_AT", "DATABASE", "SCHEMA", "NAME", "PACKAGE_NAME", "PATH", "CHECKSUM", "META", "ALIAS")
-        (
-            select "COMMAND_INVOCATION_ID", "NODE_ID", "RUN_STARTED_AT", "DATABASE", "SCHEMA", "NAME", "PACKAGE_NAME", "PATH", "CHECKSUM", "META", "ALIAS"
-            from BRONZE.DBT.seeds__dbt_tmp
+        create or replace transient table BRONZE.OBSERVABILITY.seeds  as
+        (/* Bigquery won't let us `where` without `from` so we use this workaround */
+with dummy_cte as (
+    select 1 as foo
+)
+
+select
+    cast(null as TEXT) as command_invocation_id,
+    cast(null as TEXT) as node_id,
+    cast(null as TIMESTAMP) as run_started_at,
+    cast(null as TEXT) as database,
+    cast(null as TEXT) as schema,
+    cast(null as TEXT) as name,
+    cast(null as TEXT) as package_name,
+    cast(null as TEXT) as path,
+    cast(null as TEXT) as checksum,
+    cast(null as 
+   OBJECT
+) as meta,
+    cast(null as TEXT) as alias
+from dummy_cte
+where 1 = 0
         );
-    commit;
+      
+  

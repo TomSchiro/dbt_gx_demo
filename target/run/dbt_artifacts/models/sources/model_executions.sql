@@ -1,11 +1,31 @@
--- back compat for old kwarg name
+
   
-  begin;
     
 
-        insert into BRONZE.DBT.model_executions ("COMMAND_INVOCATION_ID", "NODE_ID", "RUN_STARTED_AT", "WAS_FULL_REFRESH", "THREAD_ID", "STATUS", "COMPILE_STARTED_AT", "QUERY_COMPLETED_AT", "TOTAL_NODE_RUNTIME", "ROWS_AFFECTED", "MATERIALIZATION", "SCHEMA", "NAME", "ALIAS")
-        (
-            select "COMMAND_INVOCATION_ID", "NODE_ID", "RUN_STARTED_AT", "WAS_FULL_REFRESH", "THREAD_ID", "STATUS", "COMPILE_STARTED_AT", "QUERY_COMPLETED_AT", "TOTAL_NODE_RUNTIME", "ROWS_AFFECTED", "MATERIALIZATION", "SCHEMA", "NAME", "ALIAS"
-            from BRONZE.DBT.model_executions__dbt_tmp
+        create or replace transient table BRONZE.OBSERVABILITY.model_executions  as
+        (/* Bigquery won't let us `where` without `from` so we use this workaround */
+with dummy_cte as (
+    select 1 as foo
+)
+
+select
+    cast(null as TEXT) as command_invocation_id,
+    cast(null as TEXT) as node_id,
+    cast(null as TIMESTAMP) as run_started_at,
+    cast(null as BOOLEAN) as was_full_refresh,
+    cast(null as TEXT) as thread_id,
+    cast(null as TEXT) as status,
+    cast(null as TIMESTAMP) as compile_started_at,
+    cast(null as TIMESTAMP) as query_completed_at,
+    cast(null as FLOAT) as total_node_runtime,
+    cast(null as INT) as rows_affected,
+    
+    cast(null as TEXT) as materialization,
+    cast(null as TEXT) as schema,
+    cast(null as TEXT) as name,
+    cast(null as TEXT) as alias
+from dummy_cte
+where 1 = 0
         );
-    commit;
+      
+  

@@ -2,8 +2,7 @@
   
     
 
-        create or replace transient table BRONZE.processed.processed_inventory
-         as
+        create or replace transient table BRONZE.processed.processed_inventory  as
         (SELECT
     PARTKEY,
     SUPPLIERKEY,

@@ -1,11 +1,11 @@
 
-  create or replace   view BRONZE.DBT.stg_dbt__tests
+  create or replace   view BRONZE.OBSERVABILITY.stg_dbt__tests
   
    as (
     with base as (
 
     select *
-    from BRONZE.DBT.tests
+    from BRONZE.OBSERVABILITY.tests
 
 ),
 

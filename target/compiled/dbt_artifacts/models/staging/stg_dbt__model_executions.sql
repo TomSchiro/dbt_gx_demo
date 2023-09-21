@@ -1,7 +1,7 @@
 with base as (
 
     select *
-    from BRONZE.LANDING.model_executions
+    from BRONZE.OBSERVABILITY.model_executions
 
 ),
 

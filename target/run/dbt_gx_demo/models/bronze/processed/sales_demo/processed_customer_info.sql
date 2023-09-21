@@ -2,8 +2,7 @@
   
     
 
-        create or replace transient table BRONZE.processed.processed_customer_info
-         as
+        create or replace transient table BRONZE.processed.processed_customer_info  as
         (SELECT 
     C_CUSTOMER_SK,
     C_CUSTOMER_ID,
