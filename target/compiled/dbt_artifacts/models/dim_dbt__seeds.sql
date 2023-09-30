@@ -1,7 +1,7 @@
 with base as (
 
     select *
-    from BRONZE.OBSERVABILITY.stg_dbt__seeds
+    from OBSERVABILITY.ARTIFACTS.stg_dbt__seeds
 
 ),
 

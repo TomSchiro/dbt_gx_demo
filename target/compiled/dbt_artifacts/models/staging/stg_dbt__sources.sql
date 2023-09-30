@@ -1,7 +1,7 @@
 with base as (
 
     select *
-    from BRONZE.OBSERVABILITY.sources
+    from OBSERVABILITY.ARTIFACTS.sources
 
 ),
 

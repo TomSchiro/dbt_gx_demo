@@ -1,43 +1,11 @@
-
+-- back compat for old kwarg name
   
+  begin;
     
 
-        create or replace transient table BRONZE.OBSERVABILITY.invocations  as
-        (/* Bigquery won't let us `where` without `from` so we use this workaround */
-with dummy_cte as (
-    select 1 as foo
-)
-
-select
-    cast(null as TEXT) as command_invocation_id,
-    cast(null as TEXT) as dbt_version,
-    cast(null as TEXT) as project_name,
-    cast(null as TIMESTAMP) as run_started_at,
-    cast(null as TEXT) as dbt_command,
-    cast(null as BOOLEAN) as full_refresh_flag,
-    cast(null as TEXT) as target_profile_name,
-    cast(null as TEXT) as target_name,
-    cast(null as TEXT) as target_schema,
-    cast(null as INT) as target_threads,
-    cast(null as TEXT) as dbt_cloud_project_id,
-    cast(null as TEXT) as dbt_cloud_job_id,
-    cast(null as TEXT) as dbt_cloud_run_id,
-    cast(null as TEXT) as dbt_cloud_run_reason_category,
-    cast(null as TEXT) as dbt_cloud_run_reason,
-    cast(null as 
-   OBJECT
-) as env_vars,
-    cast(null as 
-   OBJECT
-) as dbt_vars,
-    cast(null as 
-   OBJECT
-) as invocation_args,
-    cast(null as 
-   OBJECT
-) as dbt_custom_envs
-from dummy_cte
-where 1 = 0
+        insert into OBSERVABILITY.ARTIFACTS.invocations ("COMMAND_INVOCATION_ID", "DBT_VERSION", "PROJECT_NAME", "RUN_STARTED_AT", "DBT_COMMAND", "FULL_REFRESH_FLAG", "TARGET_PROFILE_NAME", "TARGET_NAME", "TARGET_SCHEMA", "TARGET_THREADS", "DBT_CLOUD_PROJECT_ID", "DBT_CLOUD_JOB_ID", "DBT_CLOUD_RUN_ID", "DBT_CLOUD_RUN_REASON_CATEGORY", "DBT_CLOUD_RUN_REASON", "ENV_VARS", "DBT_VARS", "INVOCATION_ARGS", "DBT_CUSTOM_ENVS")
+        (
+            select "COMMAND_INVOCATION_ID", "DBT_VERSION", "PROJECT_NAME", "RUN_STARTED_AT", "DBT_COMMAND", "FULL_REFRESH_FLAG", "TARGET_PROFILE_NAME", "TARGET_NAME", "TARGET_SCHEMA", "TARGET_THREADS", "DBT_CLOUD_PROJECT_ID", "DBT_CLOUD_JOB_ID", "DBT_CLOUD_RUN_ID", "DBT_CLOUD_RUN_REASON_CATEGORY", "DBT_CLOUD_RUN_REASON", "ENV_VARS", "DBT_VARS", "INVOCATION_ARGS", "DBT_CUSTOM_ENVS"
+            from OBSERVABILITY.ARTIFACTS.invocations__dbt_tmp
         );
-      
-  
+    commit;

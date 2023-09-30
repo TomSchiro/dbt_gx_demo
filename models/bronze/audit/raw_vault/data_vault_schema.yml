@@ -101,3 +101,28 @@ models:
           - dbt_constraints.primary_key
           - unique
           - not_null
+  - name: hub_airline
+    config:
+      meta:
+        database_tags:
+          hub_airline_tag: 'flights'
+
+    columns:
+      - name: AIRLINE_CD
+        meta:
+          database_tags:
+            airline_cd_tag: 'AIRLINE_CD'
+            privacy_category: 'SENSITIVE'
+  - name: hub_airplane
+    config:
+      meta:
+        database_tags:
+          hub_airline_tag: 'airplanes'
+
+    columns:
+      - name: TAIL_NUMBER
+        meta:
+          database_tags:
+            airport_cd_tag: 'PLANE_TYPE'
+            privacy_category: 'SENSITIVE' 
+            semantic_category: 'plane_model_id'

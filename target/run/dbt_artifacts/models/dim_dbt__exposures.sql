@@ -1,11 +1,11 @@
 
-  create or replace   view BRONZE.OBSERVABILITY.dim_dbt__exposures
+  create or replace   view OBSERVABILITY.ARTIFACTS.dim_dbt__exposures
   
    as (
     with base as (
 
     select *
-    from BRONZE.OBSERVABILITY.stg_dbt__exposures
+    from OBSERVABILITY.ARTIFACTS.stg_dbt__exposures
 
 ),
 

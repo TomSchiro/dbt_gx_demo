@@ -1,7 +1,7 @@
 with base as (
 
     select *
-    from BRONZE.OBSERVABILITY.snapshot_executions
+    from OBSERVABILITY.ARTIFACTS.snapshot_executions
 
 ),
 

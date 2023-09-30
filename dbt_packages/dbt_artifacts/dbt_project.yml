@@ -10,11 +10,17 @@ clean-targets: # folders to be removed by `dbt clean`
   - "logs"
 
 models:
-  dbt_artifacts:
-    +schema: OBSERVABILITY
-    +materialized: view
-    +file_format: delta
-    sources:
-      +materialized: incremental
-      +on_schema_change: append_new_columns
-      +full_refresh: true
+    dbt_artifacts:
+      +materialized: view
+      +file_format: delta
+      +database: OBSERVABILITY
+      +schema: ARTIFACTS
+      staging:
+        +database: OBSERVABILITY
+        +schema: ARTIFACTS
+      sources:
+        +materialized: incremental
+        +on_schema_change: append_new_columns
+        +full_refresh: false
+        +database: OBSERVABILITY
+        +schema: ARTIFACTS

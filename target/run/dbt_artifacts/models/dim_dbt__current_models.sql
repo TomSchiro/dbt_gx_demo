@@ -1,15 +1,15 @@
 
-  create or replace   view BRONZE.OBSERVABILITY.dim_dbt__current_models
+  create or replace   view OBSERVABILITY.ARTIFACTS.dim_dbt__current_models
   
    as (
     with base as (
     select *
-    from BRONZE.OBSERVABILITY.stg_dbt__models
+    from OBSERVABILITY.ARTIFACTS.stg_dbt__models
 ),
 
 model_executions as (
     select *
-    from BRONZE.OBSERVABILITY.stg_dbt__model_executions
+    from OBSERVABILITY.ARTIFACTS.stg_dbt__model_executions
 ),
 
 latest_models as (

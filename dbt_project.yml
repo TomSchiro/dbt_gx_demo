@@ -111,16 +111,16 @@ models:
       +materialized: view
       +file_format: delta
       +database: BRONZE
-      +schema: DBT
+      +schema: OBSERVABILITY
       staging:
         +database: BRONZE
-        +schema: DBT
+        +schema: OBSERVABILITY
       sources:
         +materialized: incremental
         +on_schema_change: append_new_columns
         +full_refresh: false
         +database: BRONZE
-        +schema: DBT
+        +schema: OBSERVABILITY
     gold:
       +materialized: view
     silver:
@@ -128,5 +128,6 @@ models:
 
 
 on-run-end:
+  - "{{ snowflake_utils.apply_meta_as_tags(results) }}"
   - "{{ log_dbt_results(results) }}"
   - "{{ dbt_artifacts.upload_results(results) }}"
